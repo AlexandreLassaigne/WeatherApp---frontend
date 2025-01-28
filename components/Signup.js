@@ -9,7 +9,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
 
-  const handleSignup = () => {
+  const handleSignup = (e) => {
+    e.preventDefault();
     if (!firstName || !lastName || !password) {
       setEmptyFields(true);
     } else {
@@ -19,46 +20,58 @@ function Signup() {
         lastName: lastName,
         password: password,
       };
-    fetch("http://localhost:3000/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if(data.result){
-        console.log(data.result);
-        router.push("/home");
-        }
-
-      });
-  }};
+      fetch("http://localhost:3000/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            console.log(data);
+            router.push("/home");
+          }
+        });
+    }
+  };
 
   return (
     <div>
-      <form>
+      <div className={styles.imageContainer}>
+        <img src="/logo.svg" />
+      </div>
+      <form onSubmit={handleSignup} className={styles.containerForm}>
         <input
           type="text"
           placeholder="FirstName"
           onChange={(e) => setFirstName(e.target.value)}
           value={firstName}
+          className={styles.input}
         />
         <input
           type="text"
           placeholder="LastName"
           onChange={(e) => setLastName(e.target.value)}
           value={lastName}
+          className={styles.input}
         />
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          className={styles.input}
         />
-        <button onClick={handleSignup}>Signup</button>
+        <button type="submit" className={styles.button}>
+          Signup
+        </button>
+        {emptyFields && (
+          <span className={styles.error}>Veuillez remplir tous les champs</span>
+        )}
+        <p onClick={() => router.push("/signin")} className={styles.texte}>
+          Vous avez déjà un compte ?
+        </p>
       </form>
-      <p onClick={() => router.push("/signin")}>Vous avez déjà un compte ?</p>
-      {emptyFields && <p>Veuillez remplir tous les champrs</p>}
     </div>
   );
 }
