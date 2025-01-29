@@ -2,23 +2,23 @@ import styles from "../styles/Signup.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-function Signup() {
+export default function Signup({ closeModal }) {
   const router = useRouter();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstnameSignup, setFirstnameSignup] = useState("");
+  const [lastnameSignup, setLastnameSignup] = useState("");
+  const [passwordSignup, setPasswordSignup] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (!firstName || !lastName || !password) {
+    if (!firstnameSignup || !lastnameSignup || !passwordSignup) {
       setEmptyFields(true);
     } else {
       setEmptyFields(false);
       const newUser = {
-        firstName: firstName,
-        lastName: lastName,
-        password: password,
+        firstName: firstnameSignup,
+        lastName: lastnameSignup,
+        password: passwordSignup,
       };
       fetch("http://localhost:3000/users/signup", {
         method: "POST",
@@ -36,44 +36,41 @@ function Signup() {
   };
 
   return (
-    <div>
-      <div className={styles.imageContainer}>
-        <img src="/logo.svg" />
-      </div>
-      <form onSubmit={handleSignup} className={styles.containerForm}>
+    <div className={styles.containerForm}>
+      <div className={styles.signupContainer}>
+        <div className={styles.close}>
+          <span onClick={closeModal} className={styles.closeButton}>
+            X
+          </span>
+        </div>
         <input
           type="text"
           placeholder="FirstName"
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
+          onChange={(e) => setFirstnameSignup(e.target.value)}
+          value={firstnameSignup}
           className={styles.input}
         />
         <input
           type="text"
           placeholder="LastName"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
+          onChange={(e) => setLastnameSignup(e.target.value)}
+          value={lastnameSignup}
           className={styles.input}
         />
         <input
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          onChange={(e) => setPasswordSignup(e.target.value)}
+          value={passwordSignup}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>
+        <button type="submit" className={styles.button} onClick={handleSignup}>
           Signup
         </button>
         {emptyFields && (
           <span className={styles.error}>Veuillez remplir tous les champs</span>
         )}
-        <p onClick={() => router.push("/signin")} className={styles.texte}>
-          Vous avez déjà un compte ?
-        </p>
-      </form>
+      </div>
     </div>
   );
 }
-
-export default Signup;

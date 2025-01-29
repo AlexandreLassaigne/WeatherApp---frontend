@@ -1,7 +1,7 @@
-import Signup from '../components/Signup';
+import Connection from '../components/Connection';
 
 function Index() {
-  return <Signup />;
+  return <Connection />;
 }
 
 export default Index;

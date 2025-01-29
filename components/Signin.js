@@ -2,7 +2,7 @@ import styles from "../styles/Signin.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-function Signin() {
+export default function Signin({ closeModal }) {
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ function Signin() {
 
   const handleSignin = (e) => {
     e.preventDefault();
-    if (!firstName || !lastName || !password) {
+    if (!firstName || !password) {
       setEmptyFields(true);
     } else {
       setEmptyFields(false);
@@ -34,11 +34,13 @@ function Signin() {
   };
 
   return (
-    <div>
-      <div className={styles.imageContainer}>
-        <img src="/logo.svg" />
-      </div>
-      <form onSubmit={handleSignin} className={styles.containerForm}>
+    <div className={styles.containerForm}>
+      <div className={styles.signupContainer}>
+        <div className={styles.close}>
+          <span onClick={closeModal} className={styles.closeButton}>
+            X
+          </span>
+        </div>
         <input
           type="text"
           placeholder="FirstName"
@@ -53,20 +55,13 @@ function Signin() {
           value={password}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>
+        <button type="submit" className={styles.button} onClick={handleSignin}>
           Signin
         </button>
         {emptyFields && (
-          <span className={styles.error}>
-            Veuillez remplir tous les champrs
-          </span>
+          <span className={styles.error}>Veuillez remplir tous les champs</span>
         )}
-        <p onClick={() => router.push("/")} className={styles.texte}>
-          Vous n'avez pas de compte ?
-        </p>
-      </form>
+      </div>
     </div>
   );
 }
-
-export default Signin;

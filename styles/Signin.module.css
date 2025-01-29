@@ -1,23 +1,40 @@
-.imageContainer{
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    height: 200px;
-    margin-top: 20px;
-}
-
 .containerForm {
+    position: fixed;
+    top: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
+    background-color: rgba(31, 41, 55, 0.75);
+    z-index: 1000;
     width: 100vw;
     margin-top: auto;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+}
+
+.close{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    color: white;
+    cursor: pointer;
+}
+
+.signupContainer {
+    width: 600px;
+    height: 400px;
+    background-color: #151D26;
+    border-radius: 10px;
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
 }
 
 .input {
-    width: 30%;
+    width: 80%;
     height: 50px;
     margin-bottom: 30px;
     border-radius: 10px;
