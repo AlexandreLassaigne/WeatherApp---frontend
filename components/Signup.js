@@ -1,8 +1,11 @@
 import styles from "../styles/Signup.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from 'react-redux';
+import {login} from '../reducers/user';
 
 export default function Signup({ closeModal }) {
+  const dispatch = useDispatch()
   const router = useRouter();
   const [firstnameSignup, setFirstnameSignup] = useState("");
   const [lastnameSignup, setLastnameSignup] = useState("");
@@ -28,7 +31,7 @@ export default function Signup({ closeModal }) {
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
-            console.log(data);
+            dispatch(login(data.user))
             router.push("/home");
           }
         });

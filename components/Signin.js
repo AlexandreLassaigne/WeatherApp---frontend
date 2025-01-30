@@ -1,21 +1,27 @@
 import styles from "../styles/Signin.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/user";
+import { addHistory } from "../reducers/history";
 
 export default function Signin({ closeModal }) {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
 
   const handleSignin = (e) => {
     e.preventDefault();
-    if (!firstName || !password) {
+    if (!firstName || !password || !lastName) {
       setEmptyFields(true);
     } else {
       setEmptyFields(false);
       const newUser = {
         firstName: firstName,
+        lastName: lastName,
         password: password,
       };
       fetch("http://localhost:3000/users/signin", {
@@ -26,8 +32,19 @@ export default function Signin({ closeModal }) {
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
-            console.log(data);
-            router.push("/home");
+            dispatch(login(data.user));
+            fetch(`http://localhost:3000/cities/${data.user.token}`)
+              .then((response) => response.json())
+              .then((data) => {
+                
+                if (data.result) {
+                  dispatch(addHistory(data));
+                  router.push("/home");
+                } else {
+                  router.push("/home");
+                } 
+              });
+              
           }
         });
     }
@@ -46,6 +63,13 @@ export default function Signin({ closeModal }) {
           placeholder="FirstName"
           onChange={(e) => setFirstName(e.target.value)}
           value={firstName}
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="LastName"
+          onChange={(e) => setLastName(e.target.value)}
+          value={lastName}
           className={styles.input}
         />
         <input
