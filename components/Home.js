@@ -30,12 +30,12 @@ function Home() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.city)
         setNewCard([data.city]);
         setName("");
         dispatch(addHistory(data.city))
       });  
   };
-
   // Liked city (inverse data flow)
   const updateLikedCity = (cityName) => {
     if (likedCity.find((city) => city === cityName)) {

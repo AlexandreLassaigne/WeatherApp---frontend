@@ -195,152 +195,187 @@ export default function Settings() {
           {drawerList}
         </Drawer>
       </div>
-      <p>My profile</p>
-      <p onClick={() => setModalFirstNameIsVisible(true)}>{user.firstName}</p>
-      {modalFirstNameIsVisible &&
-        createPortal(
-          <div className={styles.containerForm}>
-            <div className={styles.changeContainer}>
-              <div className={styles.close}>
-                <span
-                  onClick={() => closeModal("firstName")}
-                  className={styles.closeButton}
-                >
-                  X
-                </span>
-              </div>
-              <input
-                type="text"
-                placeholder="New FirstName"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                className={styles.input}
-              />
-              <input
-                type="text"
-                placeholder="LastName"
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                className={styles.input}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                className={styles.input}
-              />
-              {error && <p className={styles.error}>{messageError}</p>}
-              <button
-                type="submit"
-                onClick={changeFirstName}
-                className={styles.button}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>,
-          document.body
-        )}
-      <p onClick={() => setModalLastNameIsVisible(true)}>{user.lastName}</p>
-      {modalLastNameIsVisible &&
-        createPortal(
-          <div className={styles.containerForm}>
-            <div className={styles.changeContainer}>
-              <div className={styles.close}>
-                <span
-                  onClick={() => closeModal("lastName")}
-                  className={styles.closeButton}
-                >
-                  X
-                </span>
-              </div>
-              <input
-                type="text"
-                placeholder="FirstName"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                className={styles.input}
-              />
-              <input
-                type="text"
-                placeholder="New LastName"
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                className={styles.input}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                className={styles.input}
-              />
-              {error && <p className={styles.error}>{messageError}</p>}
-              <button
-                type="submit"
-                onClick={changeLastName}
-                className={styles.button}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>,
-          document.body
-        )}
-      <p onClick={() => setModalPasswordIsVisible(true)}>Change password</p>
-      {modalPasswordIsVisible &&
-        createPortal(
-          <div className={styles.containerForm}>
-            <div className={styles.changeContainer}>
-              <div className={styles.close}>
-                <span
-                  onClick={() => closeModal("password")}
-                  className={styles.closeButton}
-                >
-                  X
-                </span>
-              </div>
-              <input
-                type="text"
-                placeholder="FirstName"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                className={styles.input}
-              />
-              <input
-                type="text"
-                placeholder="New LastName"
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                className={styles.input}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                className={styles.input}
-              />
-              <input
-                type="password"
-                placeholder="New password"
-                onChange={(e) => setNewPassword(e.target.value)}
-                value={newPassword}
-                className={styles.input}
-              />
-              {error && <p className={styles.error}>{messageError}</p>}
-              <button
-                type="submit"
-                onClick={changePassword}
-                className={styles.button}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>,
-          document.body
-        )}
+      <div className={styles.settings}>
+        <h2>My profile</h2>
+        <div className={styles.profile}>
+          <h3 className={styles.title}>FirstName</h3>
+          <p>{user.firstName}</p>
+          <button
+            className={styles.change}
+            onClick={() => setModalFirstNameIsVisible(true)}
+          >
+            Change my FirstName
+          </button>
+          {modalFirstNameIsVisible &&
+            createPortal(
+              <div className={styles.containerForm}>
+                <div className={styles.changeContainer}>
+                  <div className={styles.close}>
+                    <span
+                      onClick={() => closeModal("firstName")}
+                      className={styles.closeButton}
+                    >
+                      X
+                    </span>
+                  </div>
+                  <p className={styles.textInfo}>
+                    You're about to change your FirstName. Make sure it's right
+                    for you!
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="New FirstName"
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    placeholder="LastName"
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                    className={styles.input}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    className={styles.input}
+                  />
+                  {error && <p className={styles.error}>{messageError}</p>}
+                  <button
+                    type="submit"
+                    onClick={changeFirstName}
+                    className={styles.button}
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>,
+              document.body
+            )}
+          <h3 className={styles.title}>LastName</h3>
+          <p>{user.lastName}</p>
+          <button
+            onClick={() => setModalLastNameIsVisible(true)}
+            className={styles.change}
+          >
+            Change my LastName
+          </button>
+          {modalLastNameIsVisible &&
+            createPortal(
+              <div className={styles.containerForm}>
+                <div className={styles.changeContainer}>
+                  <div className={styles.close}>
+                    <span
+                      onClick={() => closeModal("lastName")}
+                      className={styles.closeButton}
+                    >
+                      X
+                    </span>
+                  </div>
+                  <p className={styles.textInfo}>
+                    You're about to change your LastName. Make sure it's right
+                    for you!
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="FirstName"
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    placeholder="New LastName"
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                    className={styles.input}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    className={styles.input}
+                  />
+                  {error && <p className={styles.error}>{messageError}</p>}
+                  <button
+                    type="submit"
+                    onClick={changeLastName}
+                    className={styles.button}
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>,
+              document.body
+            )}
+          <button
+            onClick={() => setModalPasswordIsVisible(true)}
+            className={styles.change}
+          >
+            Change password
+          </button>
+          {modalPasswordIsVisible &&
+            createPortal(
+              <div className={styles.containerForm}>
+                <div className={styles.changeContainer}>
+                  <div className={styles.close}>
+                    <span
+                      onClick={() => closeModal("password")}
+                      className={styles.closeButton}
+                    >
+                      X
+                    </span>
+                  </div>
+                  <p className={styles.textInfo}>
+                    You're about to change your password. Make sure you remember
+                    it!
+                  </p>
+                  <input
+                    type="text"
+                    placeholder="FirstName"
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                    className={styles.input}
+                  />
+                  <input
+                    type="text"
+                    placeholder="New LastName"
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                    className={styles.input}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    className={styles.input}
+                  />
+                  <input
+                    type="password"
+                    placeholder="New password"
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    value={newPassword}
+                    className={styles.input}
+                  />
+                  {error && <p className={styles.error}>{messageError}</p>}
+                  <button
+                    type="submit"
+                    onClick={changePassword}
+                    className={styles.button}
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>,
+              document.body
+            )}
+        </div>
+      </div>
     </div>
   );
 }

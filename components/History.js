@@ -11,11 +11,11 @@ import { logout } from "../reducers/user";
 import { removeAllHistory } from "../reducers/history";
 
 export default function History() {
-
   const [likedCity, setLikedCity] = useState([]);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const history = useSelector((state) => state.history.value);
+  const histories = history.flat();
   const dispatch = useDispatch();
 
   const handleOpen = (newOpen) => {
@@ -24,7 +24,7 @@ export default function History() {
 
   const handleLogout = () => {
     dispatch(logout());
-    dispatch(removeAllHistory())
+    dispatch(removeAllHistory());
     router.push("/");
   };
 
@@ -68,11 +68,11 @@ export default function History() {
     }
   };
 
-  const city = history.map((data, i) => {
+  const cities = histories.map((data, e) => {
     const isLiked = likedCity.some((city) => city === data.name);
     return (
       <Card
-        key={i}
+        key={e}
         name={data.name}
         main={data.main}
         description={data.description}
@@ -106,7 +106,7 @@ export default function History() {
           {drawerList}
         </Drawer>
       </div>
-      <div className={styles.cityContainer}>{city}</div>
+      <div className={styles.cityContainer}>{cities}</div>
     </div>
   );
 }

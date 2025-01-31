@@ -36,9 +36,9 @@ export default function Signin({ closeModal }) {
             fetch(`http://localhost:3000/cities/${data.user.token}`)
               .then((response) => response.json())
               .then((data) => {
-                
+                console.log(data.city)
                 if (data.result) {
-                  dispatch(addHistory(data));
+                  dispatch(addHistory(data.city));
                   router.push("/home");
                 } else {
                   router.push("/home");
