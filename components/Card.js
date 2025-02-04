@@ -1,26 +1,34 @@
 import styles from "../styles/Card.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { addBookmark, removeBookmark } from "../reducers/bookmarks";
 
 export default function Card(props) {
+
+  const dispatch = useDispatch();
+
   let title = {};
   if (props.main === "Rain") {
     title = { color: "#ffffff" };
   }
 
   const handleLikeCity = () => {
-    props.updateLikedCity(props.name);
+    if (props.isLiked) {
+      dispatch(removeBookmark(props));
+    } else {
+      dispatch(addBookmark(props));
+    }
   };
-
 
   let heartStyle = { cursor: "pointer" };
   if (props.isLiked) {
     heartStyle = { cursor: "pointer", color: "#e74c3c" };
   }
 
-/*   let tempMax = props.tempMax.toFixed(0);
+  let tempMax = props.tempMax.toFixed(0);
   let tempMin = props.tempMin.toFixed(0);
-  let cityName = props.name[0].toUpperCase() + props.name.slice(1); */
+  let cityName = props.name[0].toUpperCase() + props.name.slice(1);
 
   return (
     <div
@@ -35,19 +43,18 @@ export default function Card(props) {
           style={heartStyle}
         />
         <p style={title} className={styles.city}>
-          {props.name}
+          {cityName}
         </p>
-        <FontAwesomeIcon icon={faCircleXmark} className={styles.xmark} />
       </div>
       <span style={title} className={styles.description}>
         {props.description}
       </span>
       <div className={styles.tempContainer}>
         <span style={title} className={styles.temp}>
-          TempMin : {props.tempMin} °C
+          TempMin : {tempMin} °C
         </span>
         <span style={title} className={styles.temp}>
-          TempMax : {props.tempMax} °C
+          TempMax : {tempMax} °C
         </span>
       </div>
     </div>

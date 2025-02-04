@@ -13,11 +13,11 @@ import { addHistory, removeAllHistory } from "../reducers/history";
 function Home() {
 
   const [name, setName] = useState("");
-  const [likedCity, setLikedCity] = useState([]);
   const [newCard, setNewCard] = useState([]);
   const router = useRouter();
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.value)
+  const bookmark = useSelector(state => state.bookmarks.value)
 
   const handleSearch = () => {
     if(!user || !user.token) {
@@ -36,26 +36,14 @@ function Home() {
         dispatch(addHistory(data.city))
       });  
   };
-  // Liked city (inverse data flow)
-  const updateLikedCity = (cityName) => {
-    if (likedCity.find((city) => city === cityName)) {
-      setLikedCity(likedCity.filter((city) => city !== cityName));
-    } else {
-      setLikedCity([...likedCity, cityName]);
-    }
-  };
+
 
   const New = newCard.map((data, i) => {
-    const isLiked = likedCity.some((city) => city === data.name);
+    const isLiked = bookmark.some((city) => city.name === data.name);
     return (
       <Card
         key={i}
-        name={data.name}
-        main={data.main}
-        description={data.description}
-        tempMin={data.tempMin}
-        tempMax={data.tempMax}
-        updateLikedCity={updateLikedCity}
+        {...data}
         isLiked={isLiked}
       />
     );

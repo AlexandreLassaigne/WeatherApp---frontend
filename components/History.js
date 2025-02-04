@@ -9,14 +9,57 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { removeAllHistory } from "../reducers/history";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { removeHistory } from "../reducers/history";
 
 export default function History() {
-  const [likedCity, setLikedCity] = useState([]);
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const history = useSelector((state) => state.history.value);
   const histories = history.flat();
   const dispatch = useDispatch();
+  const bookmark = useSelector((state) => state.bookmarks.value);
+  const historyPage = router.pathname === "/history";
+
+  console.log(histories)
+
+    const removeHistory = () => {
+      fetch(`http://localhost:3000/cities/deleteCity/${histories.name}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.deleted > 0) {
+            dispatch(removeHistory(histories));
+          }
+        });
+    };
+
+  const cities = histories
+    .filter(
+      (data, i, self) =>
+        //verifie si l'index de la premiere occurence de cette ville est le même que l'index actuel du tableau.
+        //Si c'est le cas, c'est la première fois qu'on rencontre cette ville et on la garde, sinon on la supprime
+        self.findIndex((city) => city.name === data.name) === i
+    )
+    .map((data, e) => {
+      const isLiked = bookmark.some((city) => city.name === data.name);
+      return (
+        <div className={styles.card}>
+          <Card key={e} {...data} isLiked={isLiked} />{" "}
+            {historyPage && (
+              <FontAwesomeIcon
+                icon={faCircleXmark}
+                className={styles.xmark}
+                 onClick={removeHistory}
+              />
+            )}
+        </div>
+      );
+    });
 
   const handleOpen = (newOpen) => {
     setOpen(newOpen);
@@ -58,31 +101,6 @@ export default function History() {
       </List>
     </Box>
   );
-
-  // Liked city (inverse data flow)
-  const updateLikedCity = (cityName) => {
-    if (likedCity.find((city) => city === cityName)) {
-      setLikedCity(likedCity.filter((city) => city !== cityName));
-    } else {
-      setLikedCity([...likedCity, cityName]);
-    }
-  };
-
-  const cities = histories.map((data, e) => {
-    const isLiked = likedCity.some((city) => city === data.name);
-    return (
-      <Card
-        key={e}
-        name={data.name}
-        main={data.main}
-        description={data.description}
-        tempMin={data.tempMin}
-        tempMax={data.tempMax}
-        updateLikedCity={updateLikedCity}
-        isLiked={isLiked}
-      />
-    );
-  });
 
   return (
     <div>

@@ -10,7 +10,6 @@
 
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
 }
 
@@ -21,15 +20,10 @@
     font-size: 20px;
 }
 
-.xmark {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 20px;
-    font-size: 20px;
-}
-
 .city {
     font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .description {

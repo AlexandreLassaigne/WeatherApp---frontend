@@ -6,10 +6,20 @@ import ListItem from "@mui/material/ListItem";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { logout } from "../reducers/user";
+import { useSelector } from "react-redux";
+import Card from "./Card";
 
 export default function Bookmarks() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const bookmark = useSelector((state) => state.bookmarks.value);
+
+  let card = <p>No card</p>;
+  if (bookmark.length > 0) {
+    card = bookmark.map((data, i) => {
+      return <Card key={i} {...data} isLiked />;
+    });
+  }
 
   const handleOpen = (newOpen) => {
     setOpen(newOpen);
@@ -60,6 +70,7 @@ export default function Bookmarks() {
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
+        <h1>Bookmarks</h1>
         <img
           className={styles.search}
           src="/user.png"
@@ -73,6 +84,7 @@ export default function Bookmarks() {
           {drawerList}
         </Drawer>
       </div>
+      <div className={styles.cityContainer}>{card}</div>
     </div>
   );
 }

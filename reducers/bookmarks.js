@@ -13,7 +13,7 @@ export const bookmarksSlice = createSlice ({
         },
 
         removeBookmark : (state, action) => {
-            state.value.filter(bookmark => bookmark.name !== action.payload.name)
+           state.value = state.value.filter(bookmark => bookmark.name !== action.payload.name)
         }
     }
 })

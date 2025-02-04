@@ -12,6 +12,7 @@ export default function Signin({ closeModal }) {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
+  const [messageError, setMessageError] = useState("");
 
   const handleSignin = (e) => {
     e.preventDefault();
@@ -36,7 +37,6 @@ export default function Signin({ closeModal }) {
             fetch(`http://localhost:3000/cities/${data.user.token}`)
               .then((response) => response.json())
               .then((data) => {
-                console.log(data.city)
                 if (data.result) {
                   dispatch(addHistory(data.city));
                   router.push("/home");

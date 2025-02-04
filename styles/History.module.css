@@ -40,3 +40,14 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.card {
+	display: flex;
+}
+
+.xmark {
+	margin-top: 70px;
+    font-size: 20px;
+	position: absolute;
+	margin-left: 300px;
+}
