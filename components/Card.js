@@ -33,7 +33,7 @@ export default function Card(props) {
   return (
     <div
       className={styles.card}
-      style={{ backgroundImage: `url(/${props.main}.gif)`, height: 400 }}
+      style={{ backgroundImage: `url(/${props.main}.gif)`, height: 400}}
     >
       <div className={styles.header}>
         <FontAwesomeIcon
@@ -41,6 +41,8 @@ export default function Card(props) {
           className={styles.heart}
           onClick={handleLikeCity}
           style={heartStyle}
+          aria-label="loving the city"
+          role="button"
         />
         <p style={title} className={styles.city}>
           {cityName}

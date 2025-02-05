@@ -1,13 +1,14 @@
 import styles from "../styles/Bookmarks.module.css";
+import Card from "./Card";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import { logout } from "../reducers/user";
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import Card from "./Card";
+import { logout } from "../reducers/user";
+
 
 export default function Bookmarks() {
   const [open, setOpen] = useState(false);
@@ -67,6 +68,7 @@ export default function Bookmarks() {
       <div className={styles.header}>
         <img
           src="/logo.svg"
+          alt='logo'
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
@@ -74,6 +76,7 @@ export default function Bookmarks() {
         <img
           className={styles.search}
           src="/user.png"
+          alt="logo user"
           onClick={() => handleOpen(true)}
         />
         <Drawer

@@ -14,8 +14,7 @@ export default function Signin({ closeModal }) {
   const [emptyFields, setEmptyFields] = useState(false);
   const [messageError, setMessageError] = useState("");
 
-  const handleSignin = (e) => {
-    e.preventDefault();
+  const handleSignin = () => {
     if (!firstName || !password || !lastName) {
       setEmptyFields(true);
     } else {
@@ -42,9 +41,8 @@ export default function Signin({ closeModal }) {
                   router.push("/home");
                 } else {
                   router.push("/home");
-                } 
+                }
               });
-              
           }
         });
     }
@@ -61,6 +59,7 @@ export default function Signin({ closeModal }) {
         <input
           type="text"
           placeholder="FirstName"
+          name="FirstName"
           onChange={(e) => setFirstName(e.target.value)}
           value={firstName}
           className={styles.input}
@@ -68,6 +67,7 @@ export default function Signin({ closeModal }) {
         <input
           type="text"
           placeholder="LastName"
+          name="LastName"
           onChange={(e) => setLastName(e.target.value)}
           value={lastName}
           className={styles.input}
@@ -75,9 +75,15 @@ export default function Signin({ closeModal }) {
         <input
           type="password"
           placeholder="Password"
+          name="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           className={styles.input}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSignin();
+            }
+          }}
         />
         <button type="submit" className={styles.button} onClick={handleSignin}>
           Signin

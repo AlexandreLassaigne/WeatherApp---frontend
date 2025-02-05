@@ -1,19 +1,18 @@
 import styles from "../styles/Signup.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from 'react-redux';
-import {login} from '../reducers/user';
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/user";
 
 export default function Signup({ closeModal }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
   const [firstnameSignup, setFirstnameSignup] = useState("");
   const [lastnameSignup, setLastnameSignup] = useState("");
   const [passwordSignup, setPasswordSignup] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
 
-  const handleSignup = (e) => {
-    e.preventDefault();
+  const handleSignup = () => {
     if (!firstnameSignup || !lastnameSignup || !passwordSignup) {
       setEmptyFields(true);
     } else {
@@ -31,7 +30,7 @@ export default function Signup({ closeModal }) {
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
-            dispatch(login(data.user))
+            dispatch(login(data.user));
             router.push("/home");
           }
         });
@@ -49,6 +48,7 @@ export default function Signup({ closeModal }) {
         <input
           type="text"
           placeholder="FirstName"
+          name="FirstName"
           onChange={(e) => setFirstnameSignup(e.target.value)}
           value={firstnameSignup}
           className={styles.input}
@@ -56,6 +56,7 @@ export default function Signup({ closeModal }) {
         <input
           type="text"
           placeholder="LastName"
+          name="LastName"
           onChange={(e) => setLastnameSignup(e.target.value)}
           value={lastnameSignup}
           className={styles.input}
@@ -63,9 +64,15 @@ export default function Signup({ closeModal }) {
         <input
           type="password"
           placeholder="Password"
+          name="Password"
           onChange={(e) => setPasswordSignup(e.target.value)}
           value={passwordSignup}
           className={styles.input}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSignup();
+            }
+          }}
         />
         <button type="submit" className={styles.button} onClick={handleSignup}>
           Signup

@@ -178,6 +178,7 @@ export default function Settings() {
       <div className={styles.header}>
         <img
           src="/logo.svg"
+          alt="logo"
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
@@ -185,6 +186,7 @@ export default function Settings() {
         <img
           className={styles.search}
           src="/user.png"
+          alt="logo user"
           onClick={() => handleOpen(true)}
         />
         <Drawer
@@ -225,6 +227,8 @@ export default function Settings() {
                   <input
                     type="text"
                     placeholder="New FirstName"
+                    name="New FirtsName"
+                    aria-label="New FirstName"
                     onChange={(e) => setFirstName(e.target.value)}
                     value={firstName}
                     className={styles.input}
@@ -232,6 +236,8 @@ export default function Settings() {
                   <input
                     type="text"
                     placeholder="LastName"
+                    name="LastName"
+                    aria-label="LastName"
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
                     className={styles.input}
@@ -239,6 +245,8 @@ export default function Settings() {
                   <input
                     type="password"
                     placeholder="Password"
+                    name="Password"
+                    aria-label="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     className={styles.input}
@@ -282,6 +290,8 @@ export default function Settings() {
                   <input
                     type="text"
                     placeholder="FirstName"
+                    name="FirstName"
+                    aria-label="FirstName"
                     onChange={(e) => setFirstName(e.target.value)}
                     value={firstName}
                     className={styles.input}
@@ -289,6 +299,8 @@ export default function Settings() {
                   <input
                     type="text"
                     placeholder="New LastName"
+                    name="New LastName"
+                    aria-label="New LastName"
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
                     className={styles.input}
@@ -296,6 +308,8 @@ export default function Settings() {
                   <input
                     type="password"
                     placeholder="Password"
+                    name="Password"
+                    aria-label="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     className={styles.input}
@@ -337,13 +351,15 @@ export default function Settings() {
                   <input
                     type="text"
                     placeholder="FirstName"
+                    name="FirstName"
                     onChange={(e) => setFirstName(e.target.value)}
                     value={firstName}
                     className={styles.input}
                   />
                   <input
                     type="text"
-                    placeholder="New LastName"
+                    placeholder="LastName"
+                    name="LastName"
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
                     className={styles.input}
@@ -351,6 +367,7 @@ export default function Settings() {
                   <input
                     type="password"
                     placeholder="Password"
+                    name="Password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     className={styles.input}
@@ -358,6 +375,7 @@ export default function Settings() {
                   <input
                     type="password"
                     placeholder="New password"
+                    name="New Password"
                     onChange={(e) => setNewPassword(e.target.value)}
                     value={newPassword}
                     className={styles.input}

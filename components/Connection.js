@@ -3,6 +3,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import { createPortal } from "react-dom";
 import { useState } from "react";
+import Image from 'next/image'
 
 function Connection() {
   const [showSignupModal, setShowSignupModal] = useState(false);
@@ -10,9 +11,9 @@ function Connection() {
 
   return (
     <div>
-      <img className={styles.image} src="/meteo.avif" />
+      <Image className={styles.image} src="/meteo.avif" alt="weather background" width={627} height={778}/>
       <div className={styles.imageContainer}>
-        <img src="/logo.svg" />
+        <Image src="/logo.svg" alt="Logo" width={200} height={200}/>
       </div>
         <div className={styles.loginDiv}>
           <button

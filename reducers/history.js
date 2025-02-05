@@ -15,9 +15,9 @@ export const historySlice = createSlice({
       }
     },
 
-    removeHistory : (state, action) => {
-      state.value = state.value.filter(history => history.name !== action.payload.name)
-   },
+    removeHistory: (state, action) => {
+      state.value = state.value.filter(history => history.name !== action.payload.name);
+    },
 
     removeAllHistory: (state) => {
       state.value = [];

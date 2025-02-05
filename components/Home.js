@@ -98,7 +98,7 @@ function Home() {
   return (
     <div>
       <div className={styles.header}>
-        <img src="/logo.svg" className={styles.logo} />
+        <img src="/logo.svg" className={styles.logo} alt="logo"/>
         <p>Hello {user.firstName}</p>
         <div className={styles.searchContainer}>
           <input
@@ -107,16 +107,23 @@ function Home() {
             onChange={(e) => setName(e.target.value)}
             value={name}
             className={styles.input}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
           />
           <img
             className={styles.search}
             src="/glass.png"
+            alt="search logo"
             onClick={handleSearch}
           />
         </div>
         <img
           className={styles.search}
           src="/user.png"
+          alt="logo user"
           onClick={() => handleOpen(true)}
         />
         <Drawer

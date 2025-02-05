@@ -14,52 +14,25 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { removeHistory } from "../reducers/history";
 
 export default function History() {
-
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const history = useSelector((state) => state.history.value);
-  const histories = history.flat();
   const dispatch = useDispatch();
   const bookmark = useSelector((state) => state.bookmarks.value);
   const historyPage = router.pathname === "/history";
+  const history = useSelector((state) => state.history.value);
+  const histories = history.flat();
 
-  console.log(histories)
-
-    const removeHistory = () => {
-      fetch(`http://localhost:3000/cities/deleteCity/${histories.name}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.deleted > 0) {
-            dispatch(removeHistory(histories));
-          }
-        });
-    };
-
-  const cities = histories
-    .filter(
-      (data, i, self) =>
-        //verifie si l'index de la premiere occurence de cette ville est le même que l'index actuel du tableau.
-        //Si c'est le cas, c'est la première fois qu'on rencontre cette ville et on la garde, sinon on la supprime
-        self.findIndex((city) => city.name === data.name) === i
-    )
-    .map((data, e) => {
-      const isLiked = bookmark.some((city) => city.name === data.name);
-      return (
-        <div className={styles.card}>
-          <Card key={e} {...data} isLiked={isLiked} />{" "}
-            {historyPage && (
-              <FontAwesomeIcon
-                icon={faCircleXmark}
-                className={styles.xmark}
-                 onClick={removeHistory}
-              />
-            )}
-        </div>
-      );
-    });
+  const handleRemove = (cityName) => {
+    fetch(`http://localhost:3000/cities/${cityName}`, { method: "DELETE" })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(removeHistory({ name: cityName }));
+        } else {
+          console.error("Error:", data.error);
+        }
+      });
+  };
 
   const handleOpen = (newOpen) => {
     setOpen(newOpen);
@@ -102,11 +75,37 @@ export default function History() {
     </Box>
   );
 
+  const cities = histories
+    .filter(
+      (data, i, self) =>
+        //verifie si l'index de la premiere occurence de cette ville est le même que l'index actuel du tableau.
+        //Si c'est le cas, c'est la première fois qu'on rencontre cette ville et on la garde, sinon on la supprime
+        self.findIndex((city) => city.name === data.name) === i
+    )
+    .map((data, e) => {
+      const isLiked = bookmark.some((city) => city.name === data.name);
+      return (
+        <div className={styles.card}>
+          <Card key={e} {...data} isLiked={isLiked} />{" "}
+          {historyPage && (
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className={styles.xmark}
+              onClick={() => handleRemove(data.name)}
+              aria-label="Delete city"
+              role="button"
+            />
+          )}
+        </div>
+      );
+    });
+
   return (
     <div>
       <div className={styles.header}>
         <img
           src="/logo.svg"
+          alt="logo"
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
@@ -114,6 +113,7 @@ export default function History() {
         <img
           className={styles.search}
           src="/user.png"
+          alt="logo user"
           onClick={() => handleOpen(true)}
         />
         <Drawer
@@ -124,7 +124,9 @@ export default function History() {
           {drawerList}
         </Drawer>
       </div>
-      <div className={styles.cityContainer}>{cities}</div>
+      <div>
+        <div className={styles.cityContainer}>{cities}</div>
+      </div>
     </div>
   );
 }
