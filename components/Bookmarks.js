@@ -6,12 +6,14 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
+import { removeAllHistory } from "../reducers/history";
 
 
 export default function Bookmarks() {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
   const router = useRouter();
   const bookmark = useSelector((state) => state.bookmarks.value);
 

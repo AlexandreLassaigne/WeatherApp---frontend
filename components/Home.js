@@ -9,15 +9,16 @@ import ListItem from "@mui/material/ListItem";
 import { useSelector, useDispatch } from "react-redux";
 import { logout} from '../reducers/user';
 import { addHistory, removeAllHistory } from "../reducers/history";
+import { removeHistory } from "../reducers/history";
 
 function Home() {
 
   const [name, setName] = useState("");
-  const [newCard, setNewCard] = useState([]);
   const router = useRouter();
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.value)
   const bookmark = useSelector(state => state.bookmarks.value)
+  const histories = useSelector(state => state.history.value)
 
   const handleSearch = () => {
     if(!user || !user.token) {
@@ -30,21 +31,34 @@ function Home() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.city)
-        setNewCard([data.city]);
         setName("");
         dispatch(addHistory(data.city))
       });  
   };
 
+  const handleRemove = (cityName) => {
+      fetch(`http://localhost:3000/cities/${cityName}`, { method: "DELETE" })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.result) {
+            dispatch(removeHistory({ name: cityName }));
 
-  const New = newCard.map((data, i) => {
+          } else {
+            console.error("Error:", data.error);
+          }
+        });
+    };
+
+
+
+  const New = histories.map((data, i) => {
     const isLiked = bookmark.some((city) => city.name === data.name);
     return (
       <Card
         key={i}
         {...data}
         isLiked={isLiked}
+        handleRemove={handleRemove}
       />
     );
   });

@@ -1,12 +1,12 @@
 import styles from "../styles/Card.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../reducers/bookmarks";
 
 export default function Card(props) {
-
   const dispatch = useDispatch();
+
 
   let title = {};
   if (props.main === "Rain") {
@@ -28,12 +28,16 @@ export default function Card(props) {
 
   let tempMax = props.tempMax.toFixed(0);
   let tempMin = props.tempMin.toFixed(0);
-  let cityName = props.name[0].toUpperCase() + props.name.slice(1);
+  let city = props.name[0].toUpperCase() + props.name.slice(1);
+
+  const handleRemoveCity = () => {
+    props.handleRemove(props.name)
+  }
 
   return (
     <div
       className={styles.card}
-      style={{ backgroundImage: `url(/${props.main}.gif)`, height: 400}}
+      style={{ backgroundImage: `url(/${props.main}.gif)`, height: 400 }}
     >
       <div className={styles.header}>
         <FontAwesomeIcon
@@ -45,8 +49,15 @@ export default function Card(props) {
           role="button"
         />
         <p style={title} className={styles.city}>
-          {cityName}
+          {city}
         </p>
+        <FontAwesomeIcon
+          icon={faCircleXmark}
+          className={styles.xmark}
+          onClick={() => handleRemoveCity()}
+          aria-label="Delete city"
+          role="button"
+        />
       </div>
       <span style={title} className={styles.description}>
         {props.description}

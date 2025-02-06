@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { removeAllHistory } from "../reducers/history";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { removeHistory } from "../reducers/history";
 
 export default function History() {
@@ -18,9 +16,19 @@ export default function History() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const bookmark = useSelector((state) => state.bookmarks.value);
-  const historyPage = router.pathname === "/history";
   const history = useSelector((state) => state.history.value);
   const histories = history.flat();
+
+
+  const handleOpen = (newOpen) => {
+    setOpen(newOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(removeAllHistory());
+    router.push("/");
+  };
 
   const handleRemove = (cityName) => {
     fetch(`http://localhost:3000/cities/${cityName}`, { method: "DELETE" })
@@ -34,15 +42,7 @@ export default function History() {
       });
   };
 
-  const handleOpen = (newOpen) => {
-    setOpen(newOpen);
-  };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    dispatch(removeAllHistory());
-    router.push("/");
-  };
 
   const drawerList = (
     <Box
@@ -86,16 +86,7 @@ export default function History() {
       const isLiked = bookmark.some((city) => city.name === data.name);
       return (
         <div className={styles.card}>
-          <Card key={e} {...data} isLiked={isLiked} />{" "}
-          {historyPage && (
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              className={styles.xmark}
-              onClick={() => handleRemove(data.name)}
-              aria-label="Delete city"
-              role="button"
-            />
-          )}
+          <Card key={e} {...data} isLiked={isLiked} handleRemove={handleRemove}/>{" "}
         </div>
       );
     });
