@@ -42,7 +42,7 @@ export default function Settings() {
       setError(true);
       return;
     }
-    fetch("http://localhost:3000/users/changePassword", {
+    fetch("https://weatherapp-backend-azure-eight.vercel.app/users/changePassword", {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -74,7 +74,7 @@ export default function Settings() {
       setError(true);
       return;
     }
-    fetch("http://localhost:3000/users/changeFirstName", {
+    fetch("https://weatherapp-backend-azure-eight.vercel.app/users/changeFirstName", {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -106,7 +106,7 @@ export default function Settings() {
       setError(true);
       return;
     }
-    fetch("http://localhost:3000/users/changeLastName", {
+    fetch("https://weatherapp-backend-azure-eight.vercel.app/users/changeLastName", {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({

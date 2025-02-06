@@ -12,7 +12,6 @@ export default function Signin({ closeModal }) {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
-  const [messageError, setMessageError] = useState("");
 
   const handleSignin = () => {
     if (!firstName || !password || !lastName) {
@@ -24,7 +23,7 @@ export default function Signin({ closeModal }) {
         lastName: lastName,
         password: password,
       };
-      fetch("http://localhost:3000/users/signin", {
+      fetch("https://weatherapp-backend-azure-eight.vercel.app/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -33,7 +32,7 @@ export default function Signin({ closeModal }) {
         .then((data) => {
           if (data.result) {
             dispatch(login(data.user));
-            fetch(`http://localhost:3000/cities/${data.user.token}`)
+            fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/${data.user.token}`)
               .then((response) => response.json())
               .then((data) => {
                 if (data.result) {

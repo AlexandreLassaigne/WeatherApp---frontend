@@ -24,7 +24,7 @@ function Home() {
     if(!user || !user.token) {
       return
     }
-      fetch(`http://localhost:3000/cities/new`, {
+      fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: name, userToken : user.token }),
@@ -37,7 +37,7 @@ function Home() {
   };
 
   const handleRemove = (cityName) => {
-      fetch(`http://localhost:3000/cities/${cityName}`, { method: "DELETE" })
+      fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/${cityName}`, { method: "DELETE" })
         .then((response) => response.json())
         .then((data) => {
           if (data.result) {
