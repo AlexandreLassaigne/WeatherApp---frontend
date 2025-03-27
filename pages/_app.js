@@ -10,8 +10,9 @@ import { combineReducers } from "@reduxjs/toolkit";
 import user from "../reducers/user";
 import bookmarks from "../reducers/bookmarks";
 import history from "../reducers/history";
+import city from "../reducers/city"
 
-const reducers = combineReducers({user, bookmarks, history})
+const reducers = combineReducers({user, bookmarks, history, city})
 
 const persistConfig = { key : "Weatherapp", storage}
 const store = configureStore({

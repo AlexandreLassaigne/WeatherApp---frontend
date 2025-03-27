@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateFirstName, updateLastName } from "../reducers/user";
 import { createPortal } from "react-dom";
 import { removeAllHistory } from "../reducers/history";
+import { removeAllCity } from "../reducers/city";
 
 export default function Settings() {
   const [open, setOpen] = useState(false);
@@ -42,17 +43,20 @@ export default function Settings() {
       setError(true);
       return;
     }
-    fetch("https://weatherapp-backend-azure-eight.vercel.app/users/changePassword", {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        password,
-        newPassword,
-        token: user.token,
-      }),
-    })
+    fetch(
+      "https://weatherapp-backend-azure-eight.vercel.app/users/changePassword",
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          password,
+          newPassword,
+          token: user.token,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.result === false) {
@@ -74,16 +78,19 @@ export default function Settings() {
       setError(true);
       return;
     }
-    fetch("https://weatherapp-backend-azure-eight.vercel.app/users/changeFirstName", {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        password,
-        token: user.token,
-      }),
-    })
+    fetch(
+      "https://weatherapp-backend-azure-eight.vercel.app/users/changeFirstName",
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          password,
+          token: user.token,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.result === false) {
@@ -106,16 +113,19 @@ export default function Settings() {
       setError(true);
       return;
     }
-    fetch("https://weatherapp-backend-azure-eight.vercel.app/users/changeLastName", {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        password,
-        token: user.token,
-      }),
-    })
+    fetch(
+      "https://weatherapp-backend-azure-eight.vercel.app/users/changeLastName",
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          password,
+          token: user.token,
+        }),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.result === false) {
@@ -139,6 +149,7 @@ export default function Settings() {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(removeAllHistory());
+    dispatch(removeAllCity());
     router.push("/");
   };
 

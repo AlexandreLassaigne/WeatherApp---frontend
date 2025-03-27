@@ -8,8 +8,8 @@ import ListItem from "@mui/material/ListItem";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
-import { removeAllHistory } from "../reducers/history";
-import { removeHistory } from "../reducers/history";
+import { removeAllHistory, removeHistory} from "../reducers/history";
+import { removeCity, removeAllCity } from "../reducers/city";
 
 export default function History() {
   const router = useRouter();
@@ -19,30 +19,34 @@ export default function History() {
   const history = useSelector((state) => state.history.value);
   const histories = history.flat();
 
-
   const handleOpen = (newOpen) => {
     setOpen(newOpen);
   };
 
   const handleLogout = () => {
-    dispatch(logout());
-    dispatch(removeAllHistory());
-    router.push("/");
-  };
+    dispatch(logout())
+    dispatch(removeAllHistory())
+    dispatch(removeAllCity())
+    router.push('/')
+  }
 
   const handleRemove = (cityName) => {
-    fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/${cityName}`, { method: "DELETE" })
+    fetch(
+      `https://weatherapp-backend-azure-eight.vercel.app/cities/${cityName}`,
+      { method: "DELETE" }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
           dispatch(removeHistory({ name: cityName }));
+          dispatch(removeCity({ name: cityName }));
         } else {
           console.error("Error:", data.error);
         }
       });
   };
 
-
+  console.log(histories)
 
   const drawerList = (
     <Box
@@ -85,9 +89,7 @@ export default function History() {
     .map((data, e) => {
       const isLiked = bookmark.some((city) => city.name === data.name);
       return (
-        <div className={styles.card}>
-          <Card key={e} {...data} isLiked={isLiked} handleRemove={handleRemove}/>{" "}
-        </div>
+        <Card key={e} {...data} isLiked={isLiked} handleRemove={handleRemove} />
       );
     });
 

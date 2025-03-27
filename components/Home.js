@@ -8,8 +8,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useSelector, useDispatch } from "react-redux";
 import { logout} from '../reducers/user';
-import { addHistory, removeAllHistory } from "../reducers/history";
-import { removeHistory } from "../reducers/history";
+import { addHistory, removeAllHistory, removeHistory } from "../reducers/history";
+import { addCity, removeAllCity, removeCity } from "../reducers/city";
 
 function Home() {
 
@@ -18,7 +18,7 @@ function Home() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.value)
   const bookmark = useSelector(state => state.bookmarks.value)
-  const histories = useSelector(state => state.history.value)
+  const cities = useSelector(state => state.city.value)
 
   const handleSearch = () => {
     if(!user || !user.token) {
@@ -33,6 +33,7 @@ function Home() {
       .then((data) => {
         setName("");
         dispatch(addHistory(data.city))
+        dispatch(addCity(data.city))
       });  
   };
 
@@ -42,16 +43,14 @@ function Home() {
         .then((data) => {
           if (data.result) {
             dispatch(removeHistory({ name: cityName }));
-
+            dispatch(removeCity({name : cityName}));
           } else {
             console.error("Error:", data.error);
           }
         });
     };
 
-
-
-  const New = histories.map((data, i) => {
+  const New = cities.map((data, i) => {
     const isLiked = bookmark.some((city) => city.name === data.name);
     return (
       <Card
@@ -72,6 +71,7 @@ function Home() {
   const handleLogout = () => {
     dispatch(logout())
     dispatch(removeAllHistory())
+    dispatch(removeAllCity())
     router.push('/')
   }
 

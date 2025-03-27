@@ -32,9 +32,10 @@ export default function Signin({ closeModal }) {
         .then((data) => {
           if (data.result) {
             dispatch(login(data.user));
-            fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/${data.user.token}`)
+            fetch(`http://localhost:3000/cities/${data.user.token}`)
               .then((response) => response.json())
               .then((data) => {
+                console.log(data.city)
                 if (data.result) {
                   dispatch(addHistory(data.city));
                   router.push("/home");

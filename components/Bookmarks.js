@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { removeAllHistory } from "../reducers/history";
+import { removeAllCity } from "../reducers/city";
 
 
 export default function Bookmarks() {
@@ -29,10 +30,11 @@ export default function Bookmarks() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
-    dispatch(removeAllHistory());
-    router.push("/");
-  };
+    dispatch(logout())
+    dispatch(removeAllHistory())
+    dispatch(removeAllCity())
+    router.push('/')
+  }
 
   const drawerList = (
     <Box
