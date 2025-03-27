@@ -12,29 +12,30 @@ import bookmarks from "../reducers/bookmarks";
 import history from "../reducers/history";
 import city from "../reducers/city"
 
-const reducers = combineReducers({user, bookmarks, history, city})
+/* const reducers = combineReducers({user, bookmarks, history, city}) */
 
-const persistConfig = { key : "Weatherapp", storage}
+/* const persistConfig = { key : "Weatherapp", storage} */
 const store = configureStore({
-  reducer: persistReducer(persistConfig, reducers),
-  middleware : (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck : false}),
+  reducer: /* persistReducer(persistConfig, reducers) */{user, bookmarks, history, city}
+/*   middleware : (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck : false}), */
 });
-const persistor = persistStore(store)
+/* const persistor = persistStore(store) */
 
 
 function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+{/*       <PersistGate persistor={persistor}> */}
       <Head>
         <title>WeatherApp</title>
         <meta
           name="description"
           content="Weather app is a web application that lets you see the weather in cities and bookmark your favorite cities"
         />
+        <link rel="icon" type="image/jpg" href="/favicon.jpg" alt='logo site wheatherapp' />
       </Head>
       <Component {...pageProps} />
-      </PersistGate>
+{/*       </PersistGate> */}
     </Provider>
   );
 }
