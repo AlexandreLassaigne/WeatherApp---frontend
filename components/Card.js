@@ -33,11 +33,10 @@ export default function Card(props) {
   const handleRemoveCity = () => {
     props.handleRemove(props.name)
   }
-console.log(props.main)
   return (
     <div
       className={styles.card}
-      style={{ backgroundImage: `url(/public/${props.main}.gif)`, height: 400 }}
+      style={{ backgroundImage: `url(/${props.main}.png)`, height: 400 }}
     >
       <div className={styles.header}>
         <FontAwesomeIcon
