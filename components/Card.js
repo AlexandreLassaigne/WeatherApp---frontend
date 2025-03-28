@@ -36,15 +36,15 @@ export default function Card(props) {
   return (
     <div
       className={styles.card}
-      style={{
+/*       style={{
         backgroundImage: `url('../public/${props.main}.gif')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         height: 400
-      }}
+      }} */
     >
-      <img src={`../public/${props.main}.gif`} alt="gif" width={200}/>
+      <img src={`/${props.main}.gif`} alt="Weather GIF" style={{ width: "100%", height: "100%" }} />
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
