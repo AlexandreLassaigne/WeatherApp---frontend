@@ -3,12 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../reducers/bookmarks";
-import Image from "next/image";
 
 export default function Card(props) {
   const dispatch = useDispatch();
 
-
+  console.log(props.main)
   let title = {};
   if (props.main === "Rain") {
     title = { color: "#ffffff" };
@@ -37,15 +36,11 @@ export default function Card(props) {
   return (
     <div
       className={styles.card}
-/*       style={{
-        backgroundImage: `url('../public/${props.main}.gif')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+      style={{
+        backgroundImage: `url('/${props.main}.gif')`,
         height: 400
-      }} */
+      }}
     >
-      <Image src="/rain.gif" alt="Weather" width={400} height={400} />
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
