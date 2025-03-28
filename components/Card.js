@@ -33,7 +33,7 @@ export default function Card(props) {
   const handleRemoveCity = () => {
     props.handleRemove(props.name)
   }
-
+console.log(props.main)
   return (
     <div
       className={styles.card}
