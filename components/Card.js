@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../reducers/bookmarks";
+import Image from "next/image";
 
 export default function Card(props) {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export default function Card(props) {
         height: 400
       }} */
     >
-      <img src={`/${props.main}.gif`} alt="Weather GIF" style={{ width: "100%", height: "100%" }} />
+      <Image src={`/${props.main}.gif`} alt="Weather" width={400} height={400} />
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
