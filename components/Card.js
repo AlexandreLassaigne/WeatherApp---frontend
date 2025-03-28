@@ -36,7 +36,13 @@ export default function Card(props) {
   return (
     <div
       className={styles.card}
-      style={{ backgroundImage: `url(https://your-vercel-app.vercel.app/${props.main}.gif)`, height: 400 }}
+      style={{
+        backgroundImage: `url('/${props.main}.gif')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        height: 400
+      }}
     >
       <div className={styles.header}>
         <FontAwesomeIcon
