@@ -7,58 +7,57 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { useSelector, useDispatch } from "react-redux";
-import { logout} from '../reducers/user';
-import { addHistory, removeAllHistory, removeHistory } from "../reducers/history";
+import { logout } from "../reducers/user";
+import {
+  addHistory,
+  removeAllHistory,
+  removeHistory,
+} from "../reducers/history";
 import { addCity, removeAllCity, removeCity } from "../reducers/city";
 
 function Home() {
-
   const [name, setName] = useState("");
   const router = useRouter();
-  const dispatch = useDispatch()
-  const user = useSelector(state => state.user.value)
-  const bookmark = useSelector(state => state.bookmarks.value)
-  const cities = useSelector(state => state.city.value)
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  const bookmark = useSelector((state) => state.bookmarks.value);
+  const cities = useSelector((state) => state.city.value);
 
   const handleSearch = () => {
-    if(!user || !user.token) {
-      return
+    if (!user || !user.token) {
+      console.log(user)
+      return;
     }
-      fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/new`, {
+    fetch("https://weatherapp-backend-jade-three.vercel.app/cities/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name, userToken : user.token }),
+      body: JSON.stringify({ name: name, userToken: user.token }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setName("");
-        dispatch(addHistory(data.city))
-        dispatch(addCity(data.city))
-      });  
+    .then((response) => response.json())
+    .then((data) => {
+      setName("");
+      dispatch(addHistory(data.city))
+      dispatch(addCity(data.city))
+    });  
   };
 
   const handleRemove = (cityName) => {
-      fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/${cityName}`, { method: "DELETE" })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.result) {
-            dispatch(removeHistory({ name: cityName }));
-            dispatch(removeCity({name : cityName}));
-          } else {
-            console.error("Error:", data.error);
-          }
-        });
-    };
+    fetch(`https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}`, { method: "DELETE" })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(removeHistory({ name: cityName }));
+          dispatch(removeCity({ name: cityName }));
+        } else {
+          console.error("Error:", data.error);
+        }
+      });
+  };
 
   const New = cities.map((data, i) => {
     const isLiked = bookmark.some((city) => city.name === data.name);
     return (
-      <Card
-        key={i}
-        {...data}
-        isLiked={isLiked}
-        handleRemove={handleRemove}
-      />
+      <Card key={i} {...data} isLiked={isLiked} handleRemove={handleRemove} />
     );
   });
 
@@ -69,11 +68,11 @@ function Home() {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-    dispatch(removeAllHistory())
-    dispatch(removeAllCity())
-    router.push('/')
-  }
+    dispatch(logout());
+    dispatch(removeAllHistory());
+    dispatch(removeAllCity());
+    router.push("/");
+  };
 
   const drawerList = (
     <Box
@@ -98,10 +97,7 @@ function Home() {
           >
             Settings
           </span>
-          <span
-            className={styles.lien}
-            onClick={handleLogout}
-          >
+          <span className={styles.lien} onClick={handleLogout}>
             Logout
           </span>
         </ListItem>
@@ -112,7 +108,7 @@ function Home() {
   return (
     <div>
       <div className={styles.header}>
-        <img src="/logo.svg" className={styles.logo} alt="logo"/>
+        <img src="/logo.svg" className={styles.logo} alt="logo" />
         <p>Hello {user.firstName}</p>
         <div className={styles.searchContainer}>
           <input

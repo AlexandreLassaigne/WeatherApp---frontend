@@ -22,7 +22,7 @@ export default function Signup({ closeModal }) {
         lastName: lastnameSignup,
         password: passwordSignup,
       };
-      fetch("https://weatherapp-backend-azure-eight.vercel.app/users/signup", {
+      fetch("https://weatherapp-backend-jade-three.vercel.app/users/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),

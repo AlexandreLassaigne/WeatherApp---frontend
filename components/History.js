@@ -32,7 +32,7 @@ export default function History() {
 
   const handleRemove = (cityName) => {
     fetch(
-      `https://weatherapp-backend-azure-eight.vercel.app/cities/${cityName}`,
+      `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}`,
       { method: "DELETE" }
     )
       .then((response) => response.json())

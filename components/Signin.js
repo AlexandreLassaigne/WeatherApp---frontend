@@ -23,7 +23,7 @@ export default function Signin({ closeModal }) {
         lastName: lastName,
         password: password,
       };
-      fetch("https://weatherapp-backend-azure-eight.vercel.app/users/signin", {
+      fetch("https://weatherapp-backend-jade-three.vercel.app/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -32,10 +32,9 @@ export default function Signin({ closeModal }) {
         .then((data) => {
           if (data.result) {
             dispatch(login(data.user));
-            fetch(`https://weatherapp-backend-azure-eight.vercel.app/cities/${data.user.token}`)
+            fetch(`https://weatherapp-backend-jade-three.vercel.app/cities/${data.user.token}`)
               .then((response) => response.json())
               .then((data) => {
-                console.log(data.city)
                 if (data.result) {
                   dispatch(addHistory(data.city));
                   router.push("/home");

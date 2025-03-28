@@ -44,7 +44,7 @@ export default function Settings() {
       return;
     }
     fetch(
-      "https://weatherapp-backend-azure-eight.vercel.app/users/changePassword",
+      "https://weatherapp-backend-jade-three.vercel.app/users/changePassword",
       {
         method: "PUT",
         headers: { "Content-type": "application/json" },
@@ -79,7 +79,7 @@ export default function Settings() {
       return;
     }
     fetch(
-      "https://weatherapp-backend-azure-eight.vercel.app/users/changeFirstName",
+      "https://weatherapp-backend-jade-three.vercel.app/users/changeFirstName",
       {
         method: "PUT",
         headers: { "Content-type": "application/json" },
@@ -114,7 +114,7 @@ export default function Settings() {
       return;
     }
     fetch(
-      "https://weatherapp-backend-azure-eight.vercel.app/users/changeLastName",
+      "https://weatherapp-backend-jade-three.vercel.app/users/changeLastName",
       {
         method: "PUT",
         headers: { "Content-type": "application/json" },
