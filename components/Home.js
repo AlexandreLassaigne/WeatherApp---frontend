@@ -25,7 +25,6 @@ function Home() {
 
   const handleSearch = () => {
     if (!user || !user.token) {
-      console.log(user)
       return;
     }
     fetch("https://weatherapp-backend-jade-three.vercel.app/cities/new", {
@@ -35,6 +34,7 @@ function Home() {
     })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
       setName("");
       dispatch(addHistory(data.city))
       dispatch(addCity(data.city))
