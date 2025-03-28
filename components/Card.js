@@ -44,7 +44,7 @@ export default function Card(props) {
         height: 400
       }}
     >
-      <img src={`/${props.main}.gif`} alt="gif" width={200}/>
+      <img src={`/public/${props.main}.gif`} alt="gif" width={200}/>
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
