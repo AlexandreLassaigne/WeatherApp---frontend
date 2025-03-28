@@ -37,7 +37,7 @@ export default function Card(props) {
     <div
       className={styles.card}
       style={{
-        backgroundImage: `url('/${props.main}.gif')`,
+        backgroundImage: `url('../public/${props.main}.gif')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
