@@ -11,7 +11,6 @@ import { logout } from "../reducers/user";
 import { removeAllHistory } from "../reducers/history";
 import { removeAllCity } from "../reducers/city";
 
-
 export default function Bookmarks() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -30,11 +29,11 @@ export default function Bookmarks() {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-    dispatch(removeAllHistory())
-    dispatch(removeAllCity())
-    router.push('/')
-  }
+    dispatch(logout());
+    dispatch(removeAllHistory());
+    dispatch(removeAllCity());
+    router.push("/");
+  };
 
   const drawerList = (
     <Box
@@ -69,10 +68,11 @@ export default function Bookmarks() {
 
   return (
     <div>
+      <img src="/meteo.avif" alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <img
           src="/logo.svg"
-          alt='logo'
+          alt="logo"
           className={styles.logo}
           onClick={() => router.push("/home")}
         />

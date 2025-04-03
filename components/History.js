@@ -8,7 +8,7 @@ import ListItem from "@mui/material/ListItem";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
-import { removeAllHistory, removeHistory} from "../reducers/history";
+import { removeAllHistory, removeHistory } from "../reducers/history";
 import { removeCity, removeAllCity } from "../reducers/city";
 
 export default function History() {
@@ -24,11 +24,11 @@ export default function History() {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-    dispatch(removeAllHistory())
-    dispatch(removeAllCity())
-    router.push('/')
-  }
+    dispatch(logout());
+    dispatch(removeAllHistory());
+    dispatch(removeAllCity());
+    router.push("/");
+  };
 
   const handleRemove = (cityName) => {
     fetch(
@@ -46,7 +46,7 @@ export default function History() {
       });
   };
 
-  console.log(histories)
+  console.log(histories);
 
   const drawerList = (
     <Box
@@ -95,6 +95,7 @@ export default function History() {
 
   return (
     <div>
+      <img src="/meteo.avif" alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <img
           src="/logo.svg"

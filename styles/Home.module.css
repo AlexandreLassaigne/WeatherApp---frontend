@@ -4,7 +4,7 @@
 	height: 10vh;
 	padding: 25px 30px 25px 30px;
 	color: white;
-	background-color: #225A86;
+	background-color: rgba(34, 91, 135, 0.7);
 }
 
 .logo {
@@ -55,4 +55,11 @@
     font-size: 32;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.imageFond {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	z-index: -100;
 }

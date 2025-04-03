@@ -186,6 +186,7 @@ export default function Settings() {
 
   return (
     <div>
+      <img src="/meteo.avif" alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <img
           src="/logo.svg"

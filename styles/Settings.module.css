@@ -4,7 +4,7 @@
 	justify-content: space-around;
 	height: 10vh;
 	color: white;
-	background-color: #225A86;
+    background-color: rgba(34, 91, 135, 0.7);
 }
 
 .logo {
@@ -144,4 +144,11 @@
 .title {
 	margin-bottom: 0;
 	margin-top: 0;
+}
+
+.imageFond {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	z-index: -100;
 }

@@ -32,16 +32,19 @@ function Home() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: name, userToken: user.token }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      setName("");
-      dispatch(addHistory(data.city))
-      dispatch(addCity(data.city))
-    });  
+      .then((response) => response.json())
+      .then((data) => {
+        setName("");
+        dispatch(addHistory(data.city));
+        dispatch(addCity(data.city));
+      });
   };
 
   const handleRemove = (cityName) => {
-    fetch(`https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}`, { method: "DELETE" })
+    fetch(
+      `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}`,
+      { method: "DELETE" }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -104,6 +107,7 @@ function Home() {
 
   return (
     <div>
+      <img src="/meteo.avif" alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <img src="/logo.svg" className={styles.logo} alt="logo" />
         <p>Hello {user.firstName}</p>
@@ -141,9 +145,6 @@ function Home() {
           {drawerList}
         </Drawer>
       </div>
-      {New.length === 0 &&(<div>
-        <img src="/fond.avif" alt="image de fond" className={styles.imageFond}/>
-      </div>)}
       <div className={styles.cityContainer}>{New}</div>
     </div>
   );
