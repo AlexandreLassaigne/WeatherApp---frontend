@@ -15,6 +15,7 @@ export default function History() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
   const bookmark = useSelector((state) => state.bookmarks.value);
   const history = useSelector((state) => state.history.value);
   const histories = history.flat();
@@ -29,10 +30,10 @@ export default function History() {
     dispatch(removeAllCity());
     router.push("/");
   };
-
+console.log(user.token)
   const handleRemove = (cityName) => {
     fetch(
-      `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}`,
+      `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}/${user.token}`,
       { method: "DELETE" }
     )
       .then((response) => response.json())

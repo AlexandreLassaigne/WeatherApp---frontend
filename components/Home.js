@@ -42,7 +42,7 @@ function Home() {
 
   const handleRemove = (cityName) => {
     fetch(
-      `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}`,
+      `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}/${user.token}`,
       { method: "DELETE" }
     )
       .then((response) => response.json())
