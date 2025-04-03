@@ -7,7 +7,7 @@ import { addBookmark, removeBookmark } from "../reducers/bookmarks";
 export default function Card(props) {
   const dispatch = useDispatch();
 
-  console.log(props.main)
+  console.log(props.main);
   let title = {};
   if (props.main === "Rain") {
     title = { color: "#ffffff" };
@@ -29,17 +29,17 @@ export default function Card(props) {
   let tempMax = props.tempMax.toFixed(0);
   let tempMin = props.tempMin.toFixed(0);
   let city = props.name[0].toUpperCase() + props.name.slice(1);
-  let Wind = props.wind.toFixed(0);
+  let Wind = props.wind.toFixed(0) * 3.6;
 
   const handleRemoveCity = () => {
-    props.handleRemove(props.name)
-  }
+    props.handleRemove(props.name);
+  };
   return (
     <div
       className={styles.card}
       style={{
         backgroundImage: `url('/${props.main}.gif')`,
-        height: 400
+        height: 400,
       }}
     >
       <div className={styles.header}>
@@ -65,13 +65,15 @@ export default function Card(props) {
       <span style={title} className={styles.description}>
         {props.description}
       </span>
-      <span>Wind : {Wind}</span>
       <div className={styles.tempContainer}>
         <span style={title} className={styles.temp}>
           TempMin : {tempMin} °C
         </span>
         <span style={title} className={styles.temp}>
           TempMax : {tempMax} °C
+        </span>
+        <span style={title} className={styles.temp}>
+          Wind : {Wind} km/h {props.deg}
         </span>
       </div>
     </div>
