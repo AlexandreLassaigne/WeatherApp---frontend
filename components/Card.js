@@ -29,6 +29,7 @@ export default function Card(props) {
   let tempMax = props.tempMax.toFixed(0);
   let tempMin = props.tempMin.toFixed(0);
   let city = props.name[0].toUpperCase() + props.name.slice(1);
+  let Wind = props.wind.toFixed(0);
 
   const handleRemoveCity = () => {
     props.handleRemove(props.name)
@@ -64,6 +65,7 @@ export default function Card(props) {
       <span style={title} className={styles.description}>
         {props.description}
       </span>
+      <span>Wind : {Wind}</span>
       <div className={styles.tempContainer}>
         <span style={title} className={styles.temp}>
           TempMin : {tempMin} °C

@@ -34,7 +34,6 @@ function Home() {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
       setName("");
       dispatch(addHistory(data.city))
       dispatch(addCity(data.city))
@@ -48,8 +47,6 @@ function Home() {
         if (data.result) {
           dispatch(removeHistory({ name: cityName }));
           dispatch(removeCity({ name: cityName }));
-        } else {
-          console.error("Error:", data.error);
         }
       });
   };
@@ -144,6 +141,9 @@ function Home() {
           {drawerList}
         </Drawer>
       </div>
+      {New.length === 0 &&(<div>
+        <img src="/fond.avif" alt="image de fond" className={styles.imageFond}/>
+      </div>)}
       <div className={styles.cityContainer}>{New}</div>
     </div>
   );
