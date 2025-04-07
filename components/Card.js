@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../reducers/bookmarks";
 
 export default function Card(props) {
+  console.log("props.main:", props.main);
+  console.log("background path:", `/${props.main}.gif`);
+
   const dispatch = useDispatch();
 
   let title = {};
@@ -54,11 +57,16 @@ export default function Card(props) {
   };
 
   const backgroundImage = {
-    backgroundImage: `url('/${props.main}.gif')`,
+    /*     backgroundImage: `url('/${props.main}.gif')`,
+    height: 400, */
+    backgroundImage: `url('/Rain.gif')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     height: 400,
+    border: "2px solid lime", // pour bien visualiser le conteneur
   };
 
-  console.log(props.main)
+  console.log(props.main);
 
   return (
     <div className={styles.card} style={backgroundImage}>
