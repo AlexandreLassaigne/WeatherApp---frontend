@@ -9,10 +9,11 @@
 }
 
 .imageFond {
-  width: 100vw;
-  height: 100vh;
+  width: 250px;
+  height: 400px;
   position: fixed;
   z-index: -100;
+  border-radius: 10px;
 }
 
 .header {
@@ -93,6 +94,11 @@
     height: 350px;
   }
 
+  .imageFond {
+    width: 200px;
+    height: 350px;
+  }
+
   .heart {
     margin-left: 15px;
     font-size: 18px;
@@ -118,6 +124,11 @@
 }
 @media (max-width: 600px) {
   .card {
+    width: 200px;
+    height: 350px;
+  }
+
+  .imageFond {
     width: 200px;
     height: 350px;
   }
@@ -151,6 +162,10 @@
     height: 350px;
   }
 
+  .imageFond {
+    width: 200px;
+    height: 350px;
+  }
   .heart {
     margin-left: 15px;
     font-size: 16px;
