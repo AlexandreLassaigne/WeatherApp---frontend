@@ -69,7 +69,16 @@ export default function Card(props) {
   console.log(props.main);
 
   return (
-    <div className={styles.card} style={backgroundImage}>
+    <div
+      className={styles.card}
+      style={{
+        backgroundImage: `url('/Rain.gif?v=1')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: 400,
+        border: "2px solid lime", // pour bien visualiser le conteneur
+      }}
+    >
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
