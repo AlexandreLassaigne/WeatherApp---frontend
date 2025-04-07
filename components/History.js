@@ -18,7 +18,6 @@ export default function History() {
   const user = useSelector((state) => state.user.value);
   const bookmark = useSelector((state) => state.bookmarks.value);
   const history = useSelector((state) => state.history.value);
-  const histories = history.flat();
 
   const handleOpen = (newOpen) => {
     setOpen(newOpen);
@@ -78,7 +77,9 @@ export default function History() {
     </Box>
   );
 
-  const cities = histories
+  console.log(history)
+
+  const cities = history
     .filter(
       (data, i, self) =>
         //verifie si l'index de la premiere occurence de cette ville est le même que l'index actuel du tableau.

@@ -5,8 +5,7 @@ import { useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../reducers/bookmarks";
 
 export default function Card(props) {
-  console.log("props.main:", props.main);
-  console.log("background path:", `/${props.main}.gif`);
+
 
   const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ export default function Card(props) {
   let tempMax = props.tempMax.toFixed(0);
   let tempMin = props.tempMin.toFixed(0);
   let city = props.name[0].toUpperCase() + props.name.slice(1);
-  let Wind = props.wind.toFixed(0) * 3.6;
+  let Wind = props.wind * 3.6;
   let direction;
 
   if (22.6 < props.deg && props.deg < 67.5) {
@@ -56,16 +55,13 @@ export default function Card(props) {
     props.handleRemove(props.name);
   };
 
-  const backgroundImage = {
-    backgroundImage: `url('/${props.main}.gif')`,
-    height: 400,
-  };
-
-  console.log(props.main);
-
   return (
     <div className={styles.card}>
-      <img src={`/${props.main.toLowerCase()}.gif`} alt="image de fond" className={styles.imageFond} />
+      <img
+        src={`/${props.main.toLowerCase()}.gif`}
+        alt="image de fond"
+        className={styles.imageFond}
+      />
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
@@ -95,7 +91,7 @@ export default function Card(props) {
           TempMax : {tempMax} °C
         </span>
         <span style={title} className={styles.temp}>
-          Wind : {Wind} km/h {direction}
+          Wind : {Wind.toFixed(0)} km/h {direction}
         </span>
       </div>
     </div>

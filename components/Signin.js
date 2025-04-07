@@ -36,7 +36,10 @@ export default function Signin({ closeModal }) {
               .then((response) => response.json())
               .then((data) => {
                 if (data.result) {
-                  dispatch(addHistory(data.city));
+                  //pour ajouter chaque ville séparement au reducer history
+                  data.city.forEach((city) => {
+                    dispatch(addHistory(city));
+                  });
                   router.push("/home");
                 } else {
                   router.push("/home");
