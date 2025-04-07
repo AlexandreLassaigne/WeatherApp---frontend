@@ -59,7 +59,7 @@ export default function Card(props) {
   const backgroundImage = {
     /*     backgroundImage: `url('/${props.main}.gif')`,
     height: 400, */
-    backgroundImage: `url('/Rain.gif')`,
+    backgroundImage: `url('/Rain.gif?v=1')`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     height: 400,
