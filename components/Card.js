@@ -65,7 +65,7 @@ export default function Card(props) {
 
   return (
     <div className={styles.card}>
-      <img src={`/${props.main}.gif`} alt="image de fond" className={styles.imageFond} />
+      <img src={`/${props.main.toLowerCase()}.gif`} alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
