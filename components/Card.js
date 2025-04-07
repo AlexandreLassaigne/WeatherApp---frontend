@@ -7,7 +7,6 @@ import { addBookmark, removeBookmark } from "../reducers/bookmarks";
 export default function Card(props) {
   const dispatch = useDispatch();
 
-  console.log(props.main);
   let title = {};
   if (props.main === "Rain") {
     title = { color: "#ffffff" };
@@ -50,11 +49,10 @@ export default function Card(props) {
     direction = 'N';
   }
 
-  console.log(props.deg)
-
   const handleRemoveCity = () => {
     props.handleRemove(props.name);
   };
+  
   return (
     <div
       className={styles.card}
@@ -72,7 +70,7 @@ export default function Card(props) {
           aria-label="loving the city"
           role="button"
         />
-        <p style={title} className={styles.city}>
+        <p className={styles.city}>
           {city}
         </p>
         <FontAwesomeIcon

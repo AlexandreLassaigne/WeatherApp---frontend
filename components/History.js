@@ -30,7 +30,7 @@ export default function History() {
     dispatch(removeAllCity());
     router.push("/");
   };
-console.log(user.token)
+
   const handleRemove = (cityName) => {
     fetch(
       `https://weatherapp-backend-jade-three.vercel.app/cities/${cityName}/${user.token}`,
@@ -46,8 +46,6 @@ console.log(user.token)
         }
       });
   };
-
-  console.log(histories);
 
   const drawerList = (
     <Box
@@ -104,7 +102,7 @@ console.log(user.token)
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
-        <h1>History</h1>
+        <h1 className={styles.h1}>History</h1>
         <img
           className={styles.search}
           src="/user.png"

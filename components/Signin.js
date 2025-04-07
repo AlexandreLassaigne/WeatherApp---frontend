@@ -49,9 +49,9 @@ export default function Signin({ closeModal }) {
 
   return (
     <div className={styles.containerForm}>
-      <div className={styles.signupContainer}>
+      <div className={styles.signinContainer}>
         <div className={styles.close}>
-          <span onClick={closeModal} className={styles.closeButton}>
+          <span onClick={closeModal}>
             X
           </span>
         </div>

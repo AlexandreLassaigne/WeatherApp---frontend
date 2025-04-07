@@ -110,7 +110,7 @@ function Home() {
       <img src="/meteo.avif" alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <img src="/logo.svg" className={styles.logo} alt="logo" />
-        <p>Hello {user.firstName}</p>
+        <h2 className={styles.h2}>Hello {user.firstName}</h2>
         <div className={styles.searchContainer}>
           <input
             type="text"

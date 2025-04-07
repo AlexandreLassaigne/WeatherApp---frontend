@@ -194,7 +194,7 @@ export default function Settings() {
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
-        <h1>Settings</h1>
+        <h1 className={styles.h1}>Settings</h1>
         <img
           className={styles.search}
           src="/user.png"
@@ -227,7 +227,6 @@ export default function Settings() {
                   <div className={styles.close}>
                     <span
                       onClick={() => closeModal("firstName")}
-                      className={styles.closeButton}
                     >
                       X
                     </span>

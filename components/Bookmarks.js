@@ -76,7 +76,7 @@ export default function Bookmarks() {
           className={styles.logo}
           onClick={() => router.push("/home")}
         />
-        <h1>Bookmarks</h1>
+        <h1 className={styles.h1}>Bookmarks</h1>
         <img
           className={styles.search}
           src="/user.png"
