@@ -11,10 +11,12 @@ export default function Signup({ closeModal }) {
   const [lastnameSignup, setLastnameSignup] = useState("");
   const [passwordSignup, setPasswordSignup] = useState("");
   const [emptyFields, setEmptyFields] = useState(false);
+  const [messageError, setMessageError] = useState("");
 
   const handleSignup = () => {
     if (!firstnameSignup || !lastnameSignup || !passwordSignup) {
       setEmptyFields(true);
+      setMessageError("Champs manquant");
     } else {
       setEmptyFields(false);
       const newUser = {
@@ -32,6 +34,8 @@ export default function Signup({ closeModal }) {
           if (data.result) {
             dispatch(login(data.user));
             router.push("/home");
+          } else {
+            setMessageError('Utilisateur déjà existant')
           }
         });
     }
@@ -77,9 +81,7 @@ export default function Signup({ closeModal }) {
         <button type="submit" className={styles.button} onClick={handleSignup}>
           Signup
         </button>
-        {emptyFields && (
-          <span className={styles.error}>Veuillez remplir tous les champs</span>
-        )}
+        <span className={styles.error}>{messageError}</span>
       </div>
     </div>
   );
