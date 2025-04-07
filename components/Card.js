@@ -57,28 +57,15 @@ export default function Card(props) {
   };
 
   const backgroundImage = {
-    /*     backgroundImage: `url('/${props.main}.gif')`,
-    height: 400, */
-    backgroundImage: `url('/Rain.gif?v=1')`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    backgroundImage: `url('/${props.main}.gif')`,
     height: 400,
-    border: "2px solid lime", // pour bien visualiser le conteneur
   };
 
   console.log(props.main);
 
   return (
-    <div
-      className={styles.card}
-      style={{
-        backgroundImage: `url('/Rain.gif?v=1')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: 400,
-        border: "2px solid lime", // pour bien visualiser le conteneur
-      }}
-    >
+    <div className={styles.card}>
+      <img src={`/${props.main}.gif`} alt="image de fond" className={styles.imageFond} />
       <div className={styles.header}>
         <FontAwesomeIcon
           icon={faHeart}
