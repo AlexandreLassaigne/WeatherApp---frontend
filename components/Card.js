@@ -58,6 +58,8 @@ export default function Card(props) {
     height: 400,
   };
 
+  console.log(props.main)
+
   return (
     <div className={styles.card} style={backgroundImage}>
       <div className={styles.header}>
